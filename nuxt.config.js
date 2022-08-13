@@ -59,17 +59,18 @@ export default {
           // type: 'Bearer'
         },
         user: {
-          property: 'user',
+          property: '',
           // autoFetch: true
         },
         endpoints: {
           login: { 
-            url: '/api/auth/login', 
-            method: 'post' 
+            url: '/api/v1/sessions', 
+            method: 'post',
+            propertyName : 'data.token'
           },
           logout: false,
           user: { 
-            url: '/api/auth/user', 
+            url: '/api/v1/user/fetch', 
             method: 'get' 
           }
         }
