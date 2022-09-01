@@ -16,7 +16,10 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
+      },
     ],
   },
 
@@ -41,7 +44,7 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -59,23 +62,23 @@ export default {
           // type: 'Bearer'
         },
         user: {
-          property: '',
+          property: 'data',
           // autoFetch: true
         },
         endpoints: {
-          login: { 
-            url: '/api/v1/sessions', 
+          login: {
+            url: '/api/v1/sessions',
             method: 'post',
-            propertyName : 'data.token'
+            propertyName: 'data.token',
           },
           logout: false,
-          user: { 
-            url: '/api/v1/user/fetch', 
-            method: 'get' 
-          }
-        }
-      }
-    }
+          user: {
+            url: '/api/v1/user/fetch',
+            method: 'get',
+          },
+        },
+      },
+    },
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
