@@ -10,49 +10,15 @@
         <div class="w-3/4 mr-6">
           <div class="bg-white p-3 mb-3 border border-gray-400 rounded-20">
             <figure class="item-image">
-              <img src="/project-image.jpg" alt="" class="rounded-20 w-full" />
+              <img :src="default_image" alt="" class="rounded-20 w-full" />
             </figure>
           </div>
           <div class="flex -mx-2">
-            <div
-              class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded-20"
-            >
+            <div v-for="image in campaign.data.image" :key="image.image_url" class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded-20" >
               <figure class="item-thumbnail">
                 <img
-                  src="/project-slider-1.jpg"
-                  alt=""
-                  class="rounded-20 w-full"
-                />
-              </figure>
-            </div>
-            <div
-              class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded-20"
-            >
-              <figure class="item-thumbnail">
-                <img
-                  src="/project-slider-2.jpg"
-                  alt=""
-                  class="rounded-20 w-full"
-                />
-              </figure>
-            </div>
-            <div
-              class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded-20"
-            >
-              <figure class="item-thumbnail">
-                <img
-                  src="/project-slider-3.jpg"
-                  alt=""
-                  class="rounded-20 w-full"
-                />
-              </figure>
-            </div>
-            <div
-              class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded-20"
-            >
-              <figure class="item-thumbnail">
-                <img
-                  src="/project-slider-4.jpg"
+                  :src="$axios.defaults.baseURL + '/' + image.image_url"
+                  @click="changeImage($axios.defaults.baseURL + '/' + image.image_url)"
                   alt=""
                   class="rounded-20 w-full"
                 />
@@ -149,6 +115,20 @@
     async asyncData({$axios, params}){
       const campaign = await $axios.$get('api/v1/campaigns/'+ params.id)
       return {campaign}
+    },
+    data(){
+      return {
+        default_image : ''
+      }
+    },
+    methods:{
+      changeImage(url){
+        this.default_image = url
+        console.log(this.default_image);
+      }
+    },
+    mounted(){
+      this.default_image = this.$axios.defaults.baseURL + '/' + this.campaign.data.image_url
     }
   }
 </script>
